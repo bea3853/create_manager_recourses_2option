@@ -1,6 +1,3 @@
-# create_manager_recourses_2option
-
-
 **1 cria a instacia da vm 
 
 crie a maquina manualmente 
@@ -11,21 +8,28 @@ existe aopção de não ser manual, mas gera erro.
 
 **2 crie o cluster e exponha
 
-declare sua zona e regiao nas variaveis
-
-export zone=europe-west4-b
-export region=europe-west4
-
 
 
 gcloud config set compute/zone europe-west4-b
 
+
+
 gcloud container clusters create cluster1
+
+
 
 gcloud container clusters get-credentials cluster1
 
+
+
+
 kubectl create deployment hello-server \
           --image=gcr.io/google-samples/hello-app:2.0
+
+
+
+
+
 
 
 kubectl expose deployment hello-server --type=LoadBalancer --port 8082
@@ -49,7 +53,15 @@ gcloud compute instance-templates create web-server-template \
 
 
 
+
+
+
+
 gcloud compute target-pools create nginx-pool --region $REGION
+
+
+
+
 
 
 
@@ -62,6 +74,11 @@ gcloud compute instance-groups managed create web-server-group \
 
 
 
+
+
+
+
+
 #mudar as regras
 gcloud compute firewall-rules create grant-tcp-rule-456  \
           --allow tcp:80 \
@@ -69,7 +86,17 @@ gcloud compute firewall-rules create grant-tcp-rule-456  \
 
 
 
+
+
+
+
+
 gcloud compute http-health-checks create http-basic-check
+
+
+
+
+
 
 
 
@@ -88,10 +115,19 @@ gcloud compute backend-services create web-server-backend \
        --global
 
 
+
+
+
+
 gcloud compute backend-services add-backend web-server-backend \
        --instance-group web-server-group \
        --instance-group-region $REGION \
        --global
+
+
+
+
+
 
 
 gcloud compute url-maps create web-server-map \
@@ -100,8 +136,14 @@ gcloud compute url-maps create web-server-map \
 
 
 
+
+
+
 gcloud compute target-http-proxies create http-lb-proxy \
        --url-map web-server-map
+
+
+
 
 
 
