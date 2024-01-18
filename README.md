@@ -1,3 +1,8 @@
+https://mange.ifrn.edu.br/shell-script-wikipedia/12-if-else.html -  DOCUMENTAÇÃO SHEEL SCRIPT
+
+
+
+
 **1 cria a instacia da vm 
 
 crie a maquina manualmente 
